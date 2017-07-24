@@ -7,9 +7,6 @@ class Matrix:
         self.ch = defaultdict(set)
         self.pvm = []
         cnt = 0
-        #i -> row
-        #j -> column
-        #k -> number
         for i in range(9):
             for j in range(9):
                 for k in range(9):

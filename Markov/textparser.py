@@ -4,7 +4,6 @@ class Parser:
         for filename in sources:
             with open(filename) as f:
                 l = [x.strip() for x in f.readlines()]
-                print(f.readlines(), filename)
                 for i in l:
                     k=self.clean(i)
                     if len(k)>0:
@@ -17,7 +16,6 @@ class Parser:
         tp = []
         with open(filename) as f:
                 l = [x.strip() for x in f.readlines()]
-                print(f.readlines(), filename)
                 for i in l:
                     k=self._clean(i)
                     if len(k)>0:

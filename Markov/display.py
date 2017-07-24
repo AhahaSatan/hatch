@@ -15,6 +15,7 @@ class Display:
         self.addbutton.pack(side = LEFT)
         self.genbutton.pack()
         self.T.pack()
+        mainloop()
 
     def addfile(self):
         self.chain.addfile(self.e.get())

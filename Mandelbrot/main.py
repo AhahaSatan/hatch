@@ -8,7 +8,7 @@ gmx = 700
 ttx = gmx
 tty = int(gmx*2/3)
 image = np.zeros((tty, ttx, 3), np.uint8)
-cv.namedWindow("poop")
+cv.namedWindow("Mandelbrot")
 ccolour = 255
 x1, y1 = 0, 0
 cnumber = 1
@@ -22,7 +22,6 @@ def save():
     cv.imwrite("captures\\img"+str(cnumber)+".png", image)
 
 def makenew(x1, y1, x2, y2):
-  #  print(x1, y1, x2, y2)
     global ttx, tty, m, image
     if x1 != x2 and y1 != y2:
         # ttx/tty == abs(x1-x2)/abs(y1-y2)
@@ -37,7 +36,7 @@ def makenew(x1, y1, x2, y2):
         z2 = m.values[x2][y2]
         m = Mandelbrot(z1.real, z1.imag, z2.real, z2.imag, ttx, tty)
         image = np.zeros((tty, ttx, 3), np.uint8)
-    cv.imshow("poop", image)
+    cv.imshow("Mandelbrot", image)
     s = cv.waitKey(0)
     #print(s)
     if s == 115: save()
@@ -58,18 +57,11 @@ def select(event, x, y, flags, param):
         if started:
             im2 = np.copy(image)
             cv.rectangle(im2, (x1, y1), (x, y), (255, 0, 0), 1)
-            cv.imshow("poop", im2)
+            cv.imshow("Mandelbrot", im2)
 
 
-cv.setMouseCallback("poop", select)
-cv.imshow("poop", image)
-#P^v(z)=log(n)*P^n/log|Zn|
-#⇒ v(z) = logp(log(N)*P^n/log|Zn|)
-#⇒ v(z) = logp(log(N)) + logp(P^n)- logp(log|Zn|)
-#⇒ v(z) = n + logp(log(N))-logp(log|Zn|)
-#⇒ v(z) = n + log(log(N)/log|Zn|)/log(P)
-#⇒ v(z) = n - log(log|Zn|/log(N))/log(P)
-#⇒ v(z) = n + log(log(N))/log(P) - log(log|Zn|)/log(P)
+cv.setMouseCallback("Mandelbrot", select)
+cv.imshow("Mandelbrot", image)
 from colour import Color
 blue = Color("blue")
 black = Color("black")
@@ -84,17 +76,12 @@ def update():
             for j in range(tty):
                 if m.set[i][j] > 0:
                     c = m.getcolour(i,j)
-            #        m.iter(i, j)
-            
-                  #  c = Color(hsl=(m.getcolour(i, j), 1, 0.5))
+
                   
                     image[j][i] = colours[int(c*100)%100]
-                #    if c > 0.5: image[j][i] = [255, 255*c, 255*c]
-                 #   else: image[j][i] = [255*c, 0, 0]
                     dn = True
         if dn: break
-    #print(m.smoothmax)
-    cv.imshow("poop", image)
+    cv.imshow("Mandelbrot", image)
     s = cv.waitKey(0)
     if s == 115: save()
     update()

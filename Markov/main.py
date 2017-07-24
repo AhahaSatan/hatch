@@ -1,5 +1,4 @@
 
-from findfile import Findfile
 from chain import Chain
 import os
 import tkinter
