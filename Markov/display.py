@@ -19,6 +19,7 @@ class Display:
 
     def addfile(self):
         self.chain.addfile(self.e.get())
+        self.e.delete(0, END)
 
     def generate(self):
         self.T.insert(END, self.chain.makeline())
