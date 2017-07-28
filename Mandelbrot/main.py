@@ -34,13 +34,16 @@ def makenew(x1, y1, x2, y2):
             ttx = int(gmx*abs(x1-x2)/abs(y1-y2))
         z1 = m.values[x1][y1]
         z2 = m.values[x2][y2]
+        pviter = m.itercount
         m = Mandelbrot(z1.real, z1.imag, z2.real, z2.imag, ttx, tty)
+        for i in range(pviter): m.iter()
         image = np.zeros((tty, ttx, 3), np.uint8)
-    cv.imshow("Mandelbrot", image)
-    s = cv.waitKey(0)
-    #print(s)
-    if s == 115: save()
-    update()
+        cv.imshow("Mandelbrot", image)
+        update()
+    else:
+        s = cv.waitKey(0)
+        if s == 115: save()
+        update()
     
 def select(event, x, y, flags, param):
     global x1, y1, started
@@ -69,18 +72,12 @@ red = Color("red")
 white = Color("white")
 colours = [[c.green*255, c.blue*255, c.red*255] for c in list(black.range_to(red, 50)) + list(red.range_to(white, 50))]#list(blue.range_to(red, 50)) + list(red.range_to(white, 50)) + list(white.range_to(blue, 50))]
 def update():
-    dn = False
-    for k in range(500):
-        m.iter()
-        for i in range(ttx):
-            for j in range(tty):
-                if m.set[i][j] > 0:
-                    c = m.getcolour(i,j)
-
-                  
-                    image[j][i] = colours[int(c*100)%100]
-                    dn = True
-        if dn: break
+    m.iter()
+    for i in range(ttx):
+        for j in range(tty):
+            if m.set[i][j] > 0:
+                c = m.getcolour(i,j)
+                image[j][i] = colours[int(c*100)%100]
     cv.imshow("Mandelbrot", image)
     s = cv.waitKey(0)
     if s == 115: save()
