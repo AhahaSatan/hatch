@@ -1,6 +1,5 @@
 import numpy as np
 import cv2 as cv
-import time
 import math
 import os
 from mandelbrot import Mandelbrot

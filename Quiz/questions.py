@@ -45,12 +45,11 @@ class Questions:
             self.new[self.dind] = requests.get("https://opentdb.com/api.php",
                             params={"token":self.token, "category":self.id,
                             "difficulty":self.dlist[self.dind], "amount":amount}).json()["results"]
-            #print(amount)
-            #print(self.available)
+
             self.available[self.dind]-=amount
         if not self.wrong.empty(): self.currpos+=1
         return self.new[self.dind].pop()
-        #print(self.new)
+    
     def answer(self, ans, question):
         if ans==question['correct_answer']:
             self.totalcorrect +=1

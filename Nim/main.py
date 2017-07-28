@@ -6,7 +6,7 @@ n = Nim(ncols)
 F = Frame()
 stv = StringVar(F)
 stv.set("3")
-#print({str(i) for i in range(1, 11)})
+
 d = [str(i) for i in range(1, 11)]
 numselector = OptionMenu(F, stv, *d)
 c = Canvas(F, width = (ncols)*100, height = 400)

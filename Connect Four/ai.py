@@ -20,10 +20,13 @@ class Ai:
         best = -9999999
         pvrand = 0
         for i in state.moves():
-            tp = state.getcopy()
-            tphash = state.hash^self.hashvals[i][len(tp[i])][1]^self.hashvals[i][len(tp[i])][1+player]
-            tp[i].append(player)
-            q = -self.negamax(Board(tp, tphash), cdepth-1, -beta, -alpha, -player)
+            #tp = state.getcopy()
+            
+            state.hash^=self.hashvals[i][len(state.board[i])][1]^self.hashvals[i][len(state.board[i])][1+player]
+            state.board[i].append(player)
+            q = -self.negamax(state, cdepth-1, -beta, -alpha, -player)
+            state.board[i].pop()
+            state.hash^=self.hashvals[i][len(state.board[i])][1]^self.hashvals[i][len(state.board[i])][1+player]
             #if q!=0: print(q, player, cdepth, i)
             if q>best:
                 best = q
