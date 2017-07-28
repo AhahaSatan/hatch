@@ -19,6 +19,7 @@ class Chain:
                 self.d[tuple(i[j-1:j+1])].append(i[j+1])
 
     def makeline(self):
+        if len(self.stvals)==0: return ""
         s = random.choice(self.stvals)
         l = [s, random.choice(self.st[s])]
         dn = {}
